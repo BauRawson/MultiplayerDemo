@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://8r0bof65vkre"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_60r5t"]
+[ext_resource type="PackedScene" uid="uid://bophtrrp5r62k" path="res://scenes/character.tscn" id="2_dgktb"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_60r5t")
+character_scene = ExtResource("2_dgktb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UserInterface" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="CanvasLayer/UserInterface"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 136.0
+offset_bottom = 47.0
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/UserInterface"]
+offset_left = 16.0
+offset_top = 78.0
+offset_right = 136.0
+offset_bottom = 109.0
+text = "Join"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/UserInterface/HostButton" to="." method="on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/UserInterface/JoinButton" to="." method="on_join_pressed"]
